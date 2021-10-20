@@ -24,8 +24,9 @@ public class Cliente {
 	@Column
 	private String telefone;
 	
+	public Cliente() {};
+	
 	public Cliente(Long id, String nome, String email, String telefone) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
