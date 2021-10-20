@@ -15,7 +15,7 @@ public class ClienteController {
 	public List<Cliente> listar() {
 		
 		var cliente1 = new Cliente(1L, "Kairi", "kairi@kh.com", "112345");
-		var cliente2 = new Cliente(2L, "Sora", "sora@kh.com", "212345");
+		var cliente2 = new Cliente(2L, "Sora", "sora@kh.com", "222345");
 		var cliente3 = new Cliente(3L, "Riku", "riku@kh.com", "312345");
 		
 		return Arrays.asList(cliente1, cliente2, cliente3);
