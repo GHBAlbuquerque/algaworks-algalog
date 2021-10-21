@@ -12,8 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.algaworks.algalog.domain.exception.NegocioException;
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
@@ -24,7 +27,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 	public ApiExceptionHandler(MessageSource messageSource) {
 		this.messageSource = messageSource;
 	}
-
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
@@ -50,8 +52,24 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 		mensagemErro.setDatahora(LocalDateTime.now());
 		mensagemErro.setMensagem("Um ou mais campos estão fora do padrão correto!");
 		mensagemErro.setCampos(campos);
+		
 		return handleExceptionInternal(ex, mensagemErro, headers, status, request);
 	}
+	
+	@ExceptionHandler(NegocioException.class)
+	public ResponseEntity<Object> handleNegocioException(NegocioException ex, WebRequest request) {
+		
+		var status = HttpStatus.BAD_REQUEST;
+		
+		var mensagemErro = new MensagemErro();	
+		mensagemErro.setStatus(status.value());
+		mensagemErro.setDatahora(LocalDateTime.now());
+		mensagemErro.setMensagem(ex.getMessage());
+		
+		return handleExceptionInternal(ex, mensagemErro, new HttpHeaders(), status, request);
+		
+	}
+	
 	
 
 }

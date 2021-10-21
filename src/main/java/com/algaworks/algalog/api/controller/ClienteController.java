@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algalog.domain.model.Cliente;
 import com.algaworks.algalog.domain.repository.ClienteRepository;
+import com.algaworks.algalog.domain.service.CatalogoClienteService;
 
 @RestController
 @RequestMapping("/clientes")
@@ -28,9 +29,11 @@ public class ClienteController {
 	
 	private final ClienteRepository clienteRepository;
 	
-	public ClienteController(ClienteRepository clienteRepository) {
-		super();
+	private final CatalogoClienteService clienteService;
+	
+	public ClienteController(ClienteRepository clienteRepository, CatalogoClienteService catalogoClienteService) {
 		this.clienteRepository = clienteRepository;
+		this.clienteService = catalogoClienteService;
 	}
 
 	@GetMapping
@@ -69,7 +72,7 @@ public class ClienteController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente cadastrar(@Valid @RequestBody Cliente cliente) {
-		return clienteRepository.save(cliente);
+		return clienteService.salvar(cliente);
 	}
 	
 	@PutMapping("/{id}")
@@ -79,7 +82,7 @@ public class ClienteController {
 		}
 		
 		cliente.setId(id);
-		cliente = clienteRepository.save(cliente);
+		cliente = clienteService.salvar(cliente);
 		return ResponseEntity.ok(cliente);
 	}
 	
@@ -89,7 +92,7 @@ public class ClienteController {
 			ResponseEntity.notFound().build();
 		}
 		
-		clienteRepository.deleteById(id);
+		clienteService.deletar(id);
 		return ResponseEntity.noContent().build();
 	}
 	
