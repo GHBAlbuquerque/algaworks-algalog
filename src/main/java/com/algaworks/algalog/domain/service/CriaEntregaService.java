@@ -6,11 +6,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.algaworks.algalog.domain.exception.NegocioException;
 import com.algaworks.algalog.domain.model.Cliente;
 import com.algaworks.algalog.domain.model.Entrega;
 import com.algaworks.algalog.domain.model.StatusEntrega;
-import com.algaworks.algalog.domain.repository.ClienteRepository;
 import com.algaworks.algalog.domain.repository.EntregaRepository;
 
 @Service
@@ -34,4 +32,5 @@ public class CriaEntregaService {
 		
 		return entregaRepository.save(entrega);
 	}
+	
 }
