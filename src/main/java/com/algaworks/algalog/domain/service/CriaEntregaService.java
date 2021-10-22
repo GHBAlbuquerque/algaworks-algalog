@@ -1,6 +1,6 @@
 package com.algaworks.algalog.domain.service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.transaction.Transactional;
 
@@ -27,7 +27,7 @@ public class CriaEntregaService {
 		Cliente cliente = catalogoClienteService.buscar(entrega.getCliente().getId());
 
 		entrega.setCliente(cliente);
-		entrega.setDataPedido(LocalDateTime.now());
+		entrega.setDataPedido(OffsetDateTime.now());
 		entrega.setStatusEntrega(StatusEntrega.PENDENTE);
 		
 		return entregaRepository.save(entrega);

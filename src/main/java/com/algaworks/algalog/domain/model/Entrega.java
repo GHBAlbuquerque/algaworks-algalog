@@ -1,7 +1,7 @@
 package com.algaworks.algalog.domain.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import javax.persistence.Embedded;
@@ -42,10 +42,10 @@ public class Entrega {
 	private StatusEntrega statusEntrega;
 	
 	@JsonProperty(access = Access.READ_ONLY)
-	private LocalDateTime dataPedido;
+	private OffsetDateTime dataPedido;
 	
 	@JsonProperty(access = Access.READ_ONLY)
-	private LocalDateTime dataFinalizacao;
+	private OffsetDateTime dataFinalizacao;
 	
 	@Embedded
 	@Valid
@@ -53,8 +53,8 @@ public class Entrega {
 
 	public Entrega() {}
 
-	public Entrega(Long id, Cliente cliente, BigDecimal taxa, StatusEntrega statusEntrega, LocalDateTime dataPedido,
-			LocalDateTime dataFinalizacao, Destinatario destinatario) {
+	public Entrega(Long id, Cliente cliente, BigDecimal taxa, StatusEntrega statusEntrega, OffsetDateTime dataPedido,
+			OffsetDateTime dataFinalizacao, Destinatario destinatario) {
 		super();
 		this.id = id;
 		this.cliente = cliente;
@@ -93,19 +93,19 @@ public class Entrega {
 		this.statusEntrega = statusEntrega;
 	}
 
-	public LocalDateTime getDataPedido() {
+	public OffsetDateTime getDataPedido() {
 		return dataPedido;
 	}
 
-	public void setDataPedido(LocalDateTime dataPedido) {
+	public void setDataPedido(OffsetDateTime dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 
-	public LocalDateTime getDataFinalizacao() {
+	public OffsetDateTime getDataFinalizacao() {
 		return dataFinalizacao;
 	}
 
-	public void setDataFinalizacao(LocalDateTime dataFinalizacao) {
+	public void setDataFinalizacao(OffsetDateTime dataFinalizacao) {
 		this.dataFinalizacao = dataFinalizacao;
 	}
 	
