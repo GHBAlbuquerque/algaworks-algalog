@@ -1,6 +1,6 @@
 package com.algaworks.algalog.api.exceptionhandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 	
 		var mensagemErro = new MensagemErro();	
 		mensagemErro.setStatus(status.value());
-		mensagemErro.setDatahora(LocalDateTime.now());
+		mensagemErro.setDatahora(OffsetDateTime.now());
 		mensagemErro.setMensagem("Um ou mais campos estão fora do padrão correto!");
 		mensagemErro.setCampos(campos);
 		
@@ -63,7 +63,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		var mensagemErro = new MensagemErro();	
 		mensagemErro.setStatus(status.value());
-		mensagemErro.setDatahora(LocalDateTime.now());
+		mensagemErro.setDatahora(OffsetDateTime.now());
 		mensagemErro.setMensagem(ex.getMessage());
 		
 		return handleExceptionInternal(ex, mensagemErro, new HttpHeaders(), status, request);
