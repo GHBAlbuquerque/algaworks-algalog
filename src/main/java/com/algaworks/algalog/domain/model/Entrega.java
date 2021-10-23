@@ -133,6 +133,5 @@ public class Entrega {
 		Entrega other = (Entrega) obj;
 		return Objects.equals(id, other.id);
 	}
-	
 
 }
