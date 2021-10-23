@@ -12,14 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.groups.ConvertGroup;
-
-import com.algaworks.algalog.domain.validation.ValidationGroups;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 @Entity
 public class Entrega {
@@ -28,27 +20,19 @@ public class Entrega {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Valid
-	@ConvertGroup(from = Default.class, to = ValidationGroups.ClienteId.class)
 	@ManyToOne
-	@NotNull
 	private Cliente cliente;
 	
-	@NotNull
 	private BigDecimal taxa;
 	
 	@Enumerated(EnumType.STRING)
-	@JsonProperty(access = Access.READ_ONLY)
 	private StatusEntrega statusEntrega;
 	
-	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime dataPedido;
 	
-	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime dataFinalizacao;
 	
 	@Embedded
-	@Valid
 	private Destinatario destinatario;
 
 	public Entrega() {}

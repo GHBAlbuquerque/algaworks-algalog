@@ -8,30 +8,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.algaworks.algalog.domain.validation.ValidationGroups;
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 @Entity
 public class Cliente {
 	
-	@NotNull(groups = ValidationGroups.ClienteId.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(groups = Default.class)
+	@NotBlank
 	@Size(max=60)
 	private String nome;
 	
-	@NotBlank(groups = Default.class)
+	@NotBlank
 	@Size(max=255)
 	@Email
 	private String email;
 	
-	@NotBlank(groups = Default.class)
+	@NotBlank
 	@Size(max=20)
 	private String telefone;
 	
