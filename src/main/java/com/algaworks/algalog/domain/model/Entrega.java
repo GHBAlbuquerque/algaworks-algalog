@@ -17,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.algaworks.algalog.domain.exception.NegocioException;
+
 @Entity
 public class Entrega {
 	
@@ -39,7 +41,8 @@ public class Entrega {
 	@Embedded
 	private Destinatario destinatario;
 	
-	@OneToMany(mappedBy = "entrega", cascade = CascadeType.ALL) //com o cascade type, a persistencia é feita automaticamente quando entrega recebe esse objeto [mesmo sem save]
+	@OneToMany(mappedBy = "entrega", cascade = CascadeType.ALL) 
+	//com o cascade type, a persistencia é feita automaticamente quando entrega recebe esse objeto [mesmo sem save]
 	private List<Ocorrencia> ocorrencias;
 
 	public Entrega() {}
@@ -82,6 +85,7 @@ public class Entrega {
 	}
 
 	public void setStatusEntrega(StatusEntrega statusEntrega) {
+		
 		this.statusEntrega = statusEntrega;
 	}
 
@@ -139,6 +143,19 @@ public class Entrega {
 			var ocorrencia = new Ocorrencia(null, descricao, OffsetDateTime.now(), this);
 			this.getOcorrencias().add(ocorrencia);
 			return ocorrencia;
+	}
+	
+	public boolean podeSerFinalizada() {
+		return StatusEntrega.PENDENTE.equals(getStatusEntrega());
+	}
+
+	public void finalizar() {
+		if(podeSerFinalizada()) {
+			this.setStatusEntrega(StatusEntrega.FINALIZADA);
+			this.dataFinalizacao = OffsetDateTime.now();
+		} else {
+			throw new NegocioException("Entrega não pôde ser finalizada");
+		}
 	}
 
 

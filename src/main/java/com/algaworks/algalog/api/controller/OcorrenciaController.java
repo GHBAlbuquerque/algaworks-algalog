@@ -16,21 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.algaworks.algalog.api.assembler.OcorrenciaAssembler;
 import com.algaworks.algalog.api.model.OcorrenciaDTO;
 import com.algaworks.algalog.api.model.input.OcorrenciaInput;
-import com.algaworks.algalog.domain.exception.EntidadeNaoEncontradaException;
-import com.algaworks.algalog.domain.exception.NegocioException;
 import com.algaworks.algalog.domain.service.entrega.BuscaEntregaService;
-import com.algaworks.algalog.domain.service.ocorrencia.RegistroOcorrenciaService;
+import com.algaworks.algalog.domain.service.ocorrencia.RegistraOcorrenciaService;
 
 @RestController
 @RequestMapping("/entregas/{entregaId}/ocorrencias")
 public class OcorrenciaController {
 	
-	private final RegistroOcorrenciaService ocorrenciaService; 
+	private final RegistraOcorrenciaService ocorrenciaService; 
 	private final BuscaEntregaService buscaEntregaService;
 	private final OcorrenciaAssembler ocorrenciaAssembler;
 	
 	
-	public OcorrenciaController(RegistroOcorrenciaService ocorrenciaService, OcorrenciaAssembler ocorrenciaAssembler, BuscaEntregaService buscaEntregaService) {
+	public OcorrenciaController(RegistraOcorrenciaService ocorrenciaService, OcorrenciaAssembler ocorrenciaAssembler, BuscaEntregaService buscaEntregaService) {
 		super();
 		this.ocorrenciaService = ocorrenciaService;
 		this.buscaEntregaService = buscaEntregaService;
