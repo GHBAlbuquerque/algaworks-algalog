@@ -1,4 +1,4 @@
-package com.algaworks.algalog.domain.service;
+package com.algaworks.algalog.domain.service.cliente;
 
 import javax.transaction.Transactional;
 

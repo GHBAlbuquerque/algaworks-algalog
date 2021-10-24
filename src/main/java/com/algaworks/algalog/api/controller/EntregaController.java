@@ -19,7 +19,7 @@ import com.algaworks.algalog.api.model.EntregaDTO;
 import com.algaworks.algalog.api.model.input.EntregaInput;
 import com.algaworks.algalog.domain.model.Entrega;
 import com.algaworks.algalog.domain.repository.EntregaRepository;
-import com.algaworks.algalog.domain.service.CriaEntregaService;
+import com.algaworks.algalog.domain.service.entrega.CriaEntregaService;
 
 @RestController
 @RequestMapping("/entregas")
@@ -59,5 +59,5 @@ public class EntregaController {
 				.map(entrega -> ResponseEntity.ok(entregaAssembler.gerarDTO(entrega)))
 				.orElse(ResponseEntity.notFound().build());
 	}
-
+	
 }

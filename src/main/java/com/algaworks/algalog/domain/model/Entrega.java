@@ -2,8 +2,11 @@ package com.algaworks.algalog.domain.model;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Entrega {
@@ -34,6 +38,9 @@ public class Entrega {
 	
 	@Embedded
 	private Destinatario destinatario;
+	
+	@OneToMany(mappedBy = "entrega", cascade = CascadeType.ALL) //com o cascade type, a persistencia é feita automaticamente quando entrega recebe esse objeto [mesmo sem save]
+	private List<Ocorrencia> ocorrencias;
 
 	public Entrega() {}
 
@@ -47,6 +54,7 @@ public class Entrega {
 		this.dataPedido = dataPedido;
 		this.dataFinalizacao = dataFinalizacao;
 		this.destinatario = destinatario;
+		this.ocorrencias = new ArrayList<>();
 	}
 
 	public Long getId() {
@@ -100,6 +108,15 @@ public class Entrega {
 	public void setTaxa(BigDecimal taxa) {
 		this.taxa = taxa;
 	}
+	
+	
+	public List<Ocorrencia> getOcorrencias() {
+		return ocorrencias;
+	}
+
+	public void setOcorrencias(List<Ocorrencia> ocorrencias) {
+		this.ocorrencias = ocorrencias;
+	}
 
 	@Override
 	public int hashCode() {
@@ -117,5 +134,12 @@ public class Entrega {
 		Entrega other = (Entrega) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	public Ocorrencia adicionarOcorrencia(String descricao) {
+			var ocorrencia = new Ocorrencia(null, descricao, OffsetDateTime.now(), this);
+			this.getOcorrencias().add(ocorrencia);
+			return ocorrencia;
+	}
+
 
 }

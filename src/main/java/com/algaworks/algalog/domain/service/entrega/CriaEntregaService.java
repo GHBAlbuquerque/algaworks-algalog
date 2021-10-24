@@ -1,4 +1,4 @@
-package com.algaworks.algalog.domain.service;
+package com.algaworks.algalog.domain.service.entrega;
 
 import java.time.OffsetDateTime;
 
@@ -10,6 +10,7 @@ import com.algaworks.algalog.domain.model.Cliente;
 import com.algaworks.algalog.domain.model.Entrega;
 import com.algaworks.algalog.domain.model.StatusEntrega;
 import com.algaworks.algalog.domain.repository.EntregaRepository;
+import com.algaworks.algalog.domain.service.cliente.CatalogoClienteService;
 
 @Service
 public class CriaEntregaService {
